@@ -77,3 +77,62 @@ sudo docker ps
 
 ### Grafana
 
+Follow the following steps to install Grafana
+
+```
+sudo apt-get install -y apt-transport-https
+sudo apt-get install -y software-properties-common wget
+wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
+echo "deb https://packages.grafana.com/enterprise/deb stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
+sudo apt-get update
+sudo apt-get install grafana-enterprise
+sudo systemctl daemon-reload
+sudo systemctl start grafana-server
+sudo systemctl status grafana-server
+sudo systemctl enable grafana-server.service
+```
+
+## Let's check the configurations now
+
+Ensure your NGINX Plus instane is working.
+
+`sudo nginx -v`
+
+Expected outcome should be similar to: `nginx version: nginx/1.19.10 (nginx-plus-r24-p1)`
+
+`curl localhost:8080/api/6`
+
+Expected outcome should be similar to: `["nginx","processes","connections","slabs","http","resolvers","ssl"]`
+
+Run your NGINX Prometheus Exporter:
+`docker run -p 9113:9113 -d nginx/nginx-prometheus-exporter:0.9.0 -nginx.plus -nginx.scrape-uri=http://<ip_local-machine>:8080/api`
+
+Ensure Prometheus Exporter is scraping the metrics:
+`curl localhost:9113/metrics`
+
+Expected outcome should be similar to: 
+	`
+	# HELP nginxexporter_build_info Exporter build information
+	# TYPE nginxexporter_build_info gauge
+	nginxexporter_build_info{commit="5f88afbd906baae02edfbab4f5715e06d88538a0",date="2021-03-22T20:16:09Z",version="0.9.0"} 1
+	# HELP nginxplus_connections_accepted Accepted client connections
+	`
+
+Access your Prometheus Instance:
+via Browser - http://localhost:9090
+
+Edit the prometheus.yaml file to ensure that you have target as - localhost:9113
+Location of prometheus.yaml file - /etc/prometheus/prometheus.yaml
+In the last line of the prometheus.yaml - ensure that you have  " - targets: ['localhost:9113'] "
+
+`sudo systemctl restart prometheus`
+
+via Browser, ensure that you are now able to view the " `nginxplus_*` " metrics in Prometheus.
+
+
+Access your Grafana Instance:
+via Browser - http://localhost:3000
+
+
+
+
