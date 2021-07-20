@@ -133,6 +133,24 @@ via Browser, ensure that you are now able to view the " `nginxplus_*` " metrics 
 Access your Grafana Instance:
 via Browser - http://localhost:3000
 
+You will have to add a new Datasource - Prometheus. 
+Details should be "localhost:9090"
+
+You can import Grafana Dashboard 12390 to view some NGINX Plus related metrics. 
 
 
+
+##### Useful Links:
+* [Install Prometheues](https://www.digitalocean.com/community/tutorials/how-to-install-prometheus-on-ubuntu-16-04)
+* [Install Grafana](https://grafana.com/docs/grafana/latest/installation/debian/)
+
+
+## Built With
+
+* [Ubuntu](https://ubuntu.com/) - My favourite Linux OS for testing
+* [NGINX Plus](https://www.nginx.com/free-trial-request/) - NGINX Plus Trial
+
+## Author
+
+* **Jay Desai** - *Other Repos* - [jay-nginx](https://github.com/jay-nginx)
 
