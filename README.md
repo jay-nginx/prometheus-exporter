@@ -1,9 +1,7 @@
 # prometheus-exporter
 This repository takes you through the details on how to extract metrics from your NGINX Plus instance using prometheus exporter and view it in Grafana. 
 
-![jay-nginx-plus-prometheus](https://user-images.githubusercontent.com/52437445/126335810-75b706d7-5856-40b3-9f3b-c0371858f842.png)
-
-<img src=https://user-images.githubusercontent.com/52437445/126335810-75b706d7-5856-40b3-9f3b-c0371858f842.png alt="Prometheus Exporter Architecture" width=700>
+<img src=https://user-images.githubusercontent.com/52437445/126335810-75b706d7-5856-40b3-9f3b-c0371858f842.png alt="Prometheus Exporter Architecture" width=850>
 
 ## Required Components
 
